@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  gobank_db:
+    container_name: gobank_db
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: gobank_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - gobank_db:/var/lib/postgresql/data
+    networks:
+      - webnet
+    restart: always
+volumes:
+  gobank_db: {}
+networks:
+  webnet:
