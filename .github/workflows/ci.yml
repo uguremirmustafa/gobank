@@ -16,7 +16,6 @@ jobs:
 
     services:
       postgres:
-        container_name: gobank_db
         image: postgres
         env:
           POSTGRES_PASSWORD: postgres
