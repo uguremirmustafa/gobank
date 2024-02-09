@@ -31,9 +31,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Create database
-        run: make createdb
-
       - name: Install golang-migrate
         run: |
           curl -L https://github.com/golang-migrate/migrate/releases/download/v4.17.0/migrate.linux-amd64.tar.gz | tar xvz
