@@ -7,3 +7,4 @@ sql:
       go:
         out: 'internal/database'
         package: 'db'
+        emit_empty_slices: true

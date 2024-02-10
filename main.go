@@ -1,10 +1,33 @@
 package main
 
 import (
-	"fmt"
+	"database/sql"
+	"log"
+
+	_ "github.com/lib/pq"
+	"github.com/uguremirmustafa/gobank/api"
+	db "github.com/uguremirmustafa/gobank/internal/database"
+)
+
+const (
+	dbDriver      = "postgres"
+	dbSource      = "postgresql://postgres:postgres@localhost:5432/gobank?sslmode=disable"
+	serverAddress = "0.0.0.0:9090"
 )
 
 func main() {
-	fmt.Println("hello world")
 
+	conn, err := sql.Open(dbDriver, dbSource)
+
+	if err != nil {
+		log.Fatal("cannot connect to db:", err)
+	}
+
+	store := db.NewStore(conn)
+	server := api.NewServer(store)
+
+	err = server.Start(serverAddress)
+	if err != nil {
+		log.Fatal("cannot start server", err)
+	}
 }
